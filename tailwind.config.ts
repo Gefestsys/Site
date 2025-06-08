@@ -62,24 +62,38 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
-        crypto: {
-          50: "#f0fdf4",
-          100: "#dcfce7",
-          200: "#bbf7d0",
-          300: "#86efac",
-          400: "#4ade80",
-          500: "#22c55e",
-          600: "#16a34a",
-          700: "#15803d",
-          800: "#166534",
-          900: "#14532d",
-          950: "#052e16",
+        // Custom crypto theme colors
+        "crypto-dark": {
+          900: "#0a0a0f",
+          800: "#111117",
+          700: "#1a1a23",
+          600: "#242432",
+          500: "#2d2d42",
+          400: "#3d3d52",
+          300: "#4d4d62",
+          200: "#6d6d82",
+          100: "#8d8da2",
         },
-        neon: {
-          green: "#00ff88",
-          cyan: "#00ffff",
-          purple: "#8b5cf6",
+        "crypto-green": {
+          900: "#0a4d2a",
+          800: "#0f5f35",
+          700: "#147240",
+          600: "#19854b",
+          500: "#1eb85c", // Main green
+          400: "#4ec975",
+          300: "#7eda8e",
+          200: "#aeeaa7",
+          100: "#dff5c0",
+          50: "#f0fae8",
         },
+        "neon-green": "#00ff88",
+        "neon-blue": "#00c3ff",
+        "neon-purple": "#c850ff",
+      },
+      fontFamily: {
+        mono: ["Roboto Mono", "Fira Code", "Courier New", "monospace"],
+        sans: ["Biennale", "Inter", "system-ui", "sans-serif"],
+        display: ["Biennale", "Inter", "system-ui", "sans-serif"],
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -88,63 +102,64 @@ export default {
       },
       keyframes: {
         "accordion-down": {
-          from: {
-            height: "0",
-          },
-          to: {
-            height: "var(--radix-accordion-content-height)",
-          },
+          from: { height: "0" },
+          to: { height: "var(--radix-accordion-content-height)" },
         },
         "accordion-up": {
-          from: {
-            height: "var(--radix-accordion-content-height)",
-          },
-          to: {
-            height: "0",
-          },
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: "0" },
         },
-        glow: {
+        "fade-in": {
+          from: { opacity: "0", transform: "translateY(20px)" },
+          to: { opacity: "1", transform: "translateY(0)" },
+        },
+        "bounce-in": {
+          "0%": { opacity: "0", transform: "scale(0.3)" },
+          "50%": { opacity: "1", transform: "scale(1.05)" },
+          "70%": { transform: "scale(0.9)" },
+          "100%": { opacity: "1", transform: "scale(1)" },
+        },
+        "pulse-neon": {
           "0%, 100%": {
-            boxShadow: "0 0 5px #22c55e, 0 0 10px #22c55e, 0 0 15px #22c55e",
+            boxShadow: "0 0 5px #00ff88, 0 0 10px #00ff88, 0 0 15px #00ff88",
           },
           "50%": {
-            boxShadow: "0 0 10px #22c55e, 0 0 20px #22c55e, 0 0 30px #22c55e",
+            boxShadow: "0 0 10px #00ff88, 0 0 20px #00ff88, 0 0 30px #00ff88",
           },
+        },
+        "data-flow": {
+          "0%": { transform: "translateX(-100%)" },
+          "100%": { transform: "translateX(100vw)" },
+        },
+        "code-typing": {
+          from: { width: "0" },
+          to: { width: "100%" },
         },
         float: {
-          "0%, 100%": {
-            transform: "translateY(0px)",
-          },
-          "50%": {
-            transform: "translateY(-10px)",
-          },
+          "0%, 100%": { transform: "translateY(0px)" },
+          "50%": { transform: "translateY(-20px)" },
         },
-        "pulse-green": {
-          "0%, 100%": {
-            opacity: "1",
-          },
-          "50%": {
-            opacity: "0.5",
-          },
-        },
-        "slide-up": {
-          "0%": {
-            transform: "translateY(100px)",
-            opacity: "0",
-          },
-          "100%": {
-            transform: "translateY(0)",
-            opacity: "1",
-          },
+        glow: {
+          "0%, 100%": { filter: "drop-shadow(0 0 5px #1eb85c)" },
+          "50%": { filter: "drop-shadow(0 0 20px #1eb85c)" },
         },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        glow: "glow 2s ease-in-out infinite alternate",
-        float: "float 3s ease-in-out infinite",
-        "pulse-green": "pulse-green 2s cubic-bezier(0.4, 0, 0.6, 1) infinite",
-        "slide-up": "slide-up 0.5s ease-out",
+        "fade-in": "fade-in 0.6s ease-out",
+        "bounce-in": "bounce-in 0.6s ease-out",
+        "pulse-neon": "pulse-neon 2s ease-in-out infinite",
+        "data-flow": "data-flow 3s linear infinite",
+        "code-typing": "code-typing 2s steps(40) infinite",
+        float: "float 6s ease-in-out infinite",
+        glow: "glow 2s ease-in-out infinite",
+      },
+      backgroundImage: {
+        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
+        "gradient-conic":
+          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+        "grid-pattern": `url("data:image/svg+xml,%3csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3e%3cg fill='none' fill-rule='evenodd'%3e%3cg fill='%23ffffff' fill-opacity='0.03'%3e%3ccircle cx='30' cy='30' r='2'/%3e%3c/g%3e%3c/g%3e%3c/svg%3e")`,
       },
     },
   },
